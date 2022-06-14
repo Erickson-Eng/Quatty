@@ -11,4 +11,7 @@ public class Log4JConstant {
     public static final String LOG4J_END_SEARCH = "[END] Finished the search for the entity ";
     public static final String LOG4J_FINISH_UPDATE_ENTITY = "[END] update completed for ";
     public static final String LOG4J_FINISH_DELETE_ENTITY = "[END] Deletion completed for ";
+    private Log4JConstant(){
+
+    }
 }
