@@ -31,6 +31,9 @@ public class School implements Serializable {
     @Column(nullable = false)
     private String name;
 
+    @Column(columnDefinition = "TEXT", length = 512)
+    private String biography;
+
     @OneToOne(cascade = CascadeType.REFRESH, orphanRemoval = true)
     @JoinColumn
     private Address address;

@@ -33,8 +33,6 @@ public class Sport implements Serializable {
     @Column(nullable = false)
     private String name;
 
-    @Column(columnDefinition = "TEXT", length = 512)
-    private String biography;
 
     @Override
     public boolean equals(Object o) {
