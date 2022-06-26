@@ -11,8 +11,8 @@ import br.com.quatty.backend.resource.repository.SportRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -63,6 +63,12 @@ public class SportServicePostgres implements SportService {
         Sport entity = verifyIfExist(id);
         return sportMapper.entityToSportResponse(entity);
     }
+    @Transactional(readOnly = true)
+    @Override
+    public List<SportResponse> ListAllSportResponse() {
+        List<Sport> ListEntity = verifyIfExist();
+        return sportListToResponseList(ListEntity);
+    }
 
     private Sport verifyIfExist(Long id){
         return sportRepository.findById(id)
@@ -72,6 +78,10 @@ public class SportServicePostgres implements SportService {
     private List<Sport> verifyIfExist(String name){
         return sportRepository.findAllByName(name)
                 .orElseThrow(() -> new EntityNotFoundException(MessageFormat.format("No results were found for your search for the given name: {} .", name)));
+    }
+
+    private List<Sport> verifyIfExist(){
+        return sportRepository.findAll();
     }
 
     private List<SportResponse> sportListToResponseList(List<Sport> sportList){
