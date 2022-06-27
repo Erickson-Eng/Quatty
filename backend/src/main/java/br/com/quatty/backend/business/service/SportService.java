@@ -18,5 +18,5 @@ public interface SportService {
 
     SportResponse findSportById(Long id);
 
-    List<SportResponse> ListAllSportResponse();
+    List<SportResponse> listAllSportResponse();
 }
