@@ -50,7 +50,7 @@ public class SchoolServicePostgresql implements SchoolService {
         School school = verifyIfExist(id);
         LOGGER.info(Log4JConstantService.LOG4J_END_SEARCH+ "school - ID: {}", id);
         updateData(school, schoolRequest);
-        LOGGER.info(Log4JConstantService.LOG4J_FINISH_UPDATE_ENTITY + "sport - ID: {}", id);
+        LOGGER.info(Log4JConstantService.LOG4J_FINISH_UPDATE_ENTITY + "school - ID: {}", id);
         return schoolMapper.entityToSchoolResponse(school);
     }
 
@@ -60,9 +60,9 @@ public class SchoolServicePostgresql implements SchoolService {
     public SchoolResponse delete(Long id) {
         LOGGER.info(Log4JConstantService.LOG4J_START_DELETE_ENTITY+ "school - ID: {} ", id);
         School school = verifyIfExist(id);
-        LOGGER.info(Log4JConstantService.LOG4J_END_SEARCH+ "sport - ID: {}", id);
+        LOGGER.info(Log4JConstantService.LOG4J_END_SEARCH+ "school - ID: {}", id);
         schoolRepository.delete(school);
-        LOGGER.info(Log4JConstantService.LOG4J_FINISH_DELETE_ENTITY+ "Address");
+        LOGGER.info(Log4JConstantService.LOG4J_FINISH_DELETE_ENTITY+ "school");
         return schoolMapper.entityToSchoolResponse(school);
     }
 
@@ -82,7 +82,7 @@ public class SchoolServicePostgresql implements SchoolService {
 
     @Override
     public List<SchoolResponse> findAllSchoolForCity(String cityName) {
-        List<School> entityList = verifyIfExistGymForCity(cityName);
+        List<School> entityList = verifyIfExistSchoolForCity(cityName);
         LOGGER.info(Log4JConstantService.LOG4J_END_SEARCH+ "schools for city: {}", cityName);
         return entityListToSchoolResponseList(entityList);
     }
@@ -104,12 +104,12 @@ public class SchoolServicePostgresql implements SchoolService {
                                 "No results were found for your search by school name: {} .", name)));
     }
 
-    private List<School> verifyIfExistGymForCity(String cityName){
+    private List<School> verifyIfExistSchoolForCity(String cityName){
         LOGGER.info(Log4JConstantService.LOG4J_START_OF_SEARCH + "school - city name: {} ", cityName);
         return schoolRepository.findAllByAddress_City(cityName)
                 .orElseThrow(() ->
                         new EntityNotFoundException(MessageFormat.format(
-                                "There are no gyms registered for the given city. City name: {} .", cityName)));
+                                "There are no school registered for the given city. City name: {} .", cityName)));
     }
 
     private List<SchoolResponse> entityListToSchoolResponseList(List<School> schoolList){

@@ -57,43 +57,43 @@ public class SportServicePostgresql implements SportService {
 
     @Override
     public SportResponse delete(Long id) {
-        LOGGER.info(Log4JConstantService.LOG4J_START_DELETE_ENTITY+ "address - ID: {} ", id);
+        LOGGER.info(Log4JConstantService.LOG4J_START_DELETE_ENTITY+ "sport - ID: {} ", id);
         Sport entity = verifyIfExist(id);
         LOGGER.info(Log4JConstantService.LOG4J_END_SEARCH+ "sport - ID: {}", id);
         sportRepository.delete(entity);
-        LOGGER.info(Log4JConstantService.LOG4J_FINISH_DELETE_ENTITY+ "Address");
+        LOGGER.info(Log4JConstantService.LOG4J_FINISH_DELETE_ENTITY+ "sport");
         return sportMapper.entityToSportResponse(entity);
     }
 
     @Override
     public List<SportResponse> findSportByName(String name) {
         List<Sport> entityList = verifyIfExist(name);
-        LOGGER.info(Log4JConstantService.LOG4J_END_SEARCH+ "address");
+        LOGGER.info(Log4JConstantService.LOG4J_END_SEARCH+ "sport");
         return sportListToResponseList(entityList);
     }
 
     @Override
     public SportResponse findSportById(Long id) {
         Sport entity = verifyIfExist(id);
-        LOGGER.info(Log4JConstantService.LOG4J_END_SEARCH+ "address");
+        LOGGER.info(Log4JConstantService.LOG4J_END_SEARCH+ "sport");
         return sportMapper.entityToSportResponse(entity);
     }
     @Transactional(readOnly = true)
     @Override
     public List<SportResponse> listAllSportResponse() {
         List<Sport> ListEntity = verifyIfExist();
-        LOGGER.info(Log4JConstantService.LOG4J_END_SEARCH+ "address");
+        LOGGER.info(Log4JConstantService.LOG4J_END_SEARCH+ "sport");
         return sportListToResponseList(ListEntity);
     }
 
     private Sport verifyIfExist(Long id){
-        LOGGER.info(Log4JConstantService.LOG4J_START_OF_SEARCH + "address - ID: {} ", id);
+        LOGGER.info(Log4JConstantService.LOG4J_START_OF_SEARCH + "sport - ID: {} ", id);
         return sportRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(String.format("Could not find any sport for the given id: %s.", String.valueOf(id))));
     }
 
     private List<Sport> verifyIfExist(String name){
-        LOGGER.info(Log4JConstantService.LOG4J_START_OF_SEARCH + "address - ID: {} ", name);
+        LOGGER.info(Log4JConstantService.LOG4J_START_OF_SEARCH + "sport - ID: {} ", name);
         return sportRepository.findAllByName(name)
                 .orElseThrow(() -> new EntityNotFoundException(MessageFormat.format("No results were found for your search for the given name: {} .", name)));
     }
