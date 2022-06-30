@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -25,6 +26,7 @@ public class SportController {
             @ApiResponse(code = 201, message = "created", response = SportResponse.class)
     })
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public SportResponse createSport(@RequestBody @Valid SportRequest sportRequest){
         return sportService.save(sportRequest);
     }
@@ -34,6 +36,7 @@ public class SportController {
             @ApiResponse(code = 200, message = "ok", response = SportResponse.class)
     })
     @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public SportResponse updateSport(@PathVariable Long id,
                                      @RequestBody @Valid SportRequest sportRequest){
         return sportService.update(id, sportRequest);
@@ -44,6 +47,7 @@ public class SportController {
             @ApiResponse(code = 200, message = "ok", response = SportResponse.class)
     })
     @DeleteMapping(path = "/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public SportResponse deleteSport(@PathVariable Long id){
         return sportService.delete(id);
     }
@@ -53,6 +57,7 @@ public class SportController {
             @ApiResponse(code = 200, message = "ok", response = SportResponse.class)
     })
     @GetMapping(path = "/find-by-id/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public SportResponse findById(@PathVariable Long id){
         return sportService.findSportById(id);
     }
@@ -62,6 +67,7 @@ public class SportController {
             @ApiResponse(code = 200, message = "ok", response = SportResponse.class)
     })
     @GetMapping(path = "/find-by-name/{name}")
+    @ResponseStatus(HttpStatus.OK)
     public List<SportResponse> findAllByName(@PathVariable String name){
         return sportService.findSportByName(name);
     }
@@ -71,6 +77,7 @@ public class SportController {
             @ApiResponse(code = 200, message = "ok", response = SportResponse.class)
     })
     @GetMapping("/list-all")
+    @ResponseStatus(HttpStatus.OK)
     public List<SportResponse> findAll(){
         return sportService.listAllSportResponse();
     }

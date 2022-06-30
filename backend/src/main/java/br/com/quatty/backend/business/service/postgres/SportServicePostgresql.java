@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class SportServicePostgresql implements SportService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(AddressServicePostgresql.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(SportServicePostgresql.class);
     private SportMapper sportMapper;
     private SportRepository sportRepository;
 

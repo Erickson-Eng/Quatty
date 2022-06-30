@@ -8,17 +8,18 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+
 @Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class GymRequest {
+public class PracticableRequest {
 
-
-    @NotBlank(message = "The gym must have a valid name")
-    private String name;
-    private String information;
-
+    @NotBlank
+    private String status;
+    private String description;
     @NotNull
-    private Long schoolId;
+    private Long sportId;
+    @NotNull
+    private Long gymId;
 }

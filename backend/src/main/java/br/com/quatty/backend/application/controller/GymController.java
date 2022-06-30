@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -24,6 +25,8 @@ public class GymController {
     @ApiResponses({
             @ApiResponse(code = 201, message = "created", response = GymResponse.class)
     })
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public GymResponse createGym(@RequestBody @Valid GymRequest gymRequest){
         return gymService.save(gymRequest);
     }
@@ -33,6 +36,7 @@ public class GymController {
             @ApiResponse(code = 200, message = "ok", response = GymResponse.class)
     })
     @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public GymResponse updateGym(@PathVariable Long id,
                                  @RequestBody @Valid GymRequest gymRequest){
         return gymService.update(id, gymRequest);
@@ -43,6 +47,7 @@ public class GymController {
             @ApiResponse(code = 200, message = "ok", response = GymRequest.class)
     })
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public GymResponse deleteGym(@PathVariable Long id){
         return gymService.delete(id);
     }
@@ -52,6 +57,7 @@ public class GymController {
             @ApiResponse(code = 200, message = "ok", response = GymRequest.class)
     })
     @GetMapping(path = "/find-by-id/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public GymResponse findGymById(@PathVariable Long id){
         return gymService.findById(id);
     }

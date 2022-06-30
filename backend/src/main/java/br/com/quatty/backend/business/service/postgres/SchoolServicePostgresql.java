@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class SchoolServicePostgresql implements SchoolService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(AddressServicePostgresql.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(SchoolServicePostgresql.class);
     private SchoolRepository schoolRepository;
     private SchoolMapper schoolMapper;
 

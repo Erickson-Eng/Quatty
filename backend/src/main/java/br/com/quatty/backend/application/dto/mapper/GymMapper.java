@@ -15,5 +15,6 @@ public interface GymMapper {
     Gym gymRequestToEntity(GymRequest gymRequest);
 
     @Mapping(target = "schoolResponse", source = "school")
+    @Mapping(target = "practicableResponses", source = "practicableSports")
     GymResponse entityToGymResponse(Gym gym);
 }

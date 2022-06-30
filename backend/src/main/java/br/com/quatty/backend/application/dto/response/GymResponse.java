@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Set;
+
 @Builder
 @Data
 @AllArgsConstructor
@@ -14,6 +16,8 @@ public class GymResponse {
 
     private String name;
     private String information;
+    @JsonProperty("Practicable_Sports")
+    private Set<PracticableResponse> practicableResponses;
 
     @JsonProperty("School")
     private SchoolResponse schoolResponse;

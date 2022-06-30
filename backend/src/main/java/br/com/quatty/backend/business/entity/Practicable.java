@@ -41,6 +41,10 @@ public class Practicable implements Serializable {
     @ManyToOne(cascade = CascadeType.REFRESH, optional = false)
     private Gym gym;
 
+    public void setStatus(String status) {
+        this.status = AvailabilityStatus.valueOf(status);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

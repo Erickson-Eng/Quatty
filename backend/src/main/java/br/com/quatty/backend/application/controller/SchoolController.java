@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -25,6 +26,7 @@ public class SchoolController {
             @ApiResponse(code = 201, message = "created", response = SchoolResponse.class)
     })
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public SchoolResponse createSchool(@RequestBody @Valid SchoolRequest schoolRequest){
         return schoolService.save(schoolRequest);
     }
@@ -34,6 +36,7 @@ public class SchoolController {
             @ApiResponse(code = 200, message = "ok", response = SchoolResponse.class)
     })
     @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public SchoolResponse updateSchool(@PathVariable Long id,
                                        @RequestBody @Valid SchoolRequest schoolRequest){
         return schoolService.update(id, schoolRequest);
@@ -44,6 +47,7 @@ public class SchoolController {
             @ApiResponse(code = 200, message = "ok", response = SchoolResponse.class)
     })
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public SchoolResponse deleteSchool(@PathVariable Long id){
         return schoolService.delete(id);
     }
@@ -53,6 +57,7 @@ public class SchoolController {
             @ApiResponse(code = 200, message = "ok", response = SchoolResponse.class)
     })
     @GetMapping(path = "/find-by-id/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public SchoolResponse findById(@PathVariable Long id){
         return schoolService.findById(id);
     }
@@ -62,6 +67,7 @@ public class SchoolController {
             @ApiResponse(code = 200, message = "ok", response = SchoolResponse.class)
     })
     @GetMapping(path = "/find-by-name/{name}")
+    @ResponseStatus(HttpStatus.OK)
     public List<SchoolResponse> findAllByName(@PathVariable String name){
         return schoolService.findAllByName(name);
     }
@@ -71,6 +77,7 @@ public class SchoolController {
             @ApiResponse(code = 200, message = "ok", response = SchoolResponse.class)
     })
     @GetMapping(path = "/find-by-city/{city}")
+    @ResponseStatus(HttpStatus.OK)
     public List<SchoolResponse> findAllSchoolForCity(@PathVariable String city){
         return schoolService.findAllSchoolForCity(city);
     }

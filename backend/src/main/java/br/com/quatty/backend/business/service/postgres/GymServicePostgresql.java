@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class GymServicePostgresql implements GymService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(AddressServicePostgresql.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(GymServicePostgresql.class);
     private GymMapper gymMapper;
     private GymRepository gymRepository;
 
