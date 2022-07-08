@@ -2,6 +2,7 @@ package br.com.quatty.backend.application.dto.request.table;
 
 import br.com.quatty.backend.application.dto.request.PracticableRequest;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonRootName;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,9 +15,10 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonRootName("Practicable")
 public class PracticableTableRequest {
 
-    @JsonProperty("PracticableList")
+    @JsonProperty("practicableList")
     @NotBlank
     private List<PracticableRequest> practicableRequests;
 }

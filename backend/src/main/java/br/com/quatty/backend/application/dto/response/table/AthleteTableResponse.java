@@ -1,6 +1,6 @@
 package br.com.quatty.backend.application.dto.response.table;
 
-import br.com.quatty.backend.application.dto.response.GymResponse;
+import br.com.quatty.backend.application.dto.response.AthleteResponse;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import lombok.AllArgsConstructor;
@@ -10,13 +10,13 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Builder
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonRootName("Gyms")
-public class GymTableResponse {
+@JsonRootName("Athletes")
+public class AthleteTableResponse {
 
-    @JsonProperty("gyms")
-    private List<GymResponse> gymResponseList;
+    @JsonProperty("athleteList")
+    private List<AthleteResponse> athleteResponses;
 }
