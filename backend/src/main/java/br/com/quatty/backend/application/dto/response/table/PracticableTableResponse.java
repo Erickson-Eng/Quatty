@@ -17,6 +17,6 @@ import java.util.List;
 @JsonRootName("Practicable")
 public class PracticableTableResponse {
 
-    @JsonProperty("PracticableList")
+    @JsonProperty("practicableList")
     private List<PracticableResponse> practicableResponseList;
 }
