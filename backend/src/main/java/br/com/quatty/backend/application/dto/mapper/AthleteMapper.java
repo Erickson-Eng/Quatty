@@ -11,11 +11,11 @@ public interface AthleteMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "address.id", source = "addressId")
-    @Mapping(target = "birtDate", source = "birtDate", dateFormat = "dd/MM/yyyy")
+    @Mapping(target = "birthDate", source = "birthDate", dateFormat = "dd/MM/yyyy")
     Athlete athleteRequestToEntity(AthleteRequest athleteRequest);
 
     @Mapping(target = "addressResponse", source = "address")
-    @Mapping(target = "birtDate", source = "birtDate", dateFormat = "dd/MM/yyyy")
+    @Mapping(target = "birthDate", source = "birthDate", dateFormat = "dd/MM/yyyy")
     AthleteResponse entityToAthleteResponse(Athlete athlete);
 
 }

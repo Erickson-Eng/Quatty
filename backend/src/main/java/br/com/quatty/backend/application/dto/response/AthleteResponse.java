@@ -16,7 +16,7 @@ public class AthleteResponse {
     private String firstName;
     private String lastName;
     private String socialName;
-    private String birtDate;
+    private String birthDate;
     private Double weight;
     private Double height;
     private Double bicepsMeasurement;

@@ -26,7 +26,7 @@ public class Profile implements Serializable {
     private String firstName;
     private String lastName;
     private String socialName;
-    private LocalDate birtDate;
+    private LocalDate birthDate;
 
     @OneToOne(cascade = {CascadeType.REFRESH})
     @JoinColumn
