@@ -85,8 +85,8 @@ public class AthleteServicePostgresql implements AthleteService {
         athlete.setFirstName(athleteRequest.getFirstName());
         athlete.setSocialName(athleteRequest.getSocialName());
         athlete.setLastName(athleteRequest.getLastName());
-        if (athleteRequest.getBirtDate() != null){
-            athlete.setBirtDate(LocalDate.parse(athleteRequest.getBirtDate(),
+        if (athleteRequest.getBirthDate() != null){
+            athlete.setBirthDate(LocalDate.parse(athleteRequest.getBirthDate(),
                     DateTimeFormatter.ofPattern(DataUtils.pattern)));
         }
         athlete.setWeight(athleteRequest.getWeight());

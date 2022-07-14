@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api/v1/address")
+@RequestMapping("/api/v1/athlete")
 @AllArgsConstructor(onConstructor = @__(@Autowired))
 public class AthleteController {
 

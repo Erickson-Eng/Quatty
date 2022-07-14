@@ -6,9 +6,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.time.LocalDate;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -27,6 +29,8 @@ public class Athlete extends Profile {
     private Double thighMeasurement;
     private Double calfMeasurement;
 
+    @OneToMany(mappedBy = "athlete")
+    private Set<Membership> memberships;
 
     public Athlete(Long id, String firstName, String lastName, String socialName,
                    LocalDate birtDate, Address address, Double weight, Double height) {
