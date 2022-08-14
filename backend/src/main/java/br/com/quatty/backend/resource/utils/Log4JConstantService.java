@@ -11,6 +11,9 @@ public class Log4JConstantService {
     public static final String LOG4J_END_SEARCH = "[END] Finished the search for the entity ";
     public static final String LOG4J_FINISH_UPDATE_ENTITY = "[END] update completed for ";
     public static final String LOG4J_FINISH_DELETE_ENTITY = "[END] Deletion completed for ";
+
+    public static final String LOG4J_SERVICE_ADDRESS = "ADDRESS SERVICE.";
+    public static final String LOG4J_SERVICE_ADDRESS_SEARCH_ID = "address - ID: {} ";
     private Log4JConstantService(){
 
     }

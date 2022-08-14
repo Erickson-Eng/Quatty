@@ -30,11 +30,11 @@ public class AddressServicePostgresql implements AddressService {
     @Transactional
     @Override
     public AddressResponse save(AddressRequest addressRequest) {
-        LOGGER.info(Log4JConstantService.LOG4J_START_SAVE_ENTITY + "address");
+        LOGGER.info(Log4JConstantService.LOG4J_START_SAVE_ENTITY + Log4JConstantService.LOG4J_SERVICE_ADDRESS);
         try{
             Address address = addressMapper.addressRequestToEntity(addressRequest);
             addressRepository.save(address);
-            LOGGER.info(Log4JConstantService.LOG4J_FINISH_SAVE_ENTITY + "address");
+            LOGGER.info(Log4JConstantService.LOG4J_FINISH_SAVE_ENTITY + Log4JConstantService.LOG4J_SERVICE_ADDRESS);
             return addressMapper.entityToAddressResponse(address);
         } catch (RuntimeException e){
             LOGGER.info(Log4JConstantService.LOG4J_ERROR_SAVE_ENTITY);
@@ -45,37 +45,37 @@ public class AddressServicePostgresql implements AddressService {
     @Transactional
     @Override
     public AddressResponse update(Long id, AddressRequest addressRequest) {
-        LOGGER.info(Log4JConstantService.LOG4J_START_UPDATE_ENTITY + " address - ID: {} ", id);
+        LOGGER.info(Log4JConstantService.LOG4J_START_UPDATE_ENTITY + Log4JConstantService.LOG4J_SERVICE_ADDRESS_SEARCH_ID, id);
         Address obj = verifyIfExist(id);
-        LOGGER.info(Log4JConstantService.LOG4J_END_SEARCH+ "address");
+        LOGGER.info(Log4JConstantService.LOG4J_END_SEARCH+ Log4JConstantService.LOG4J_SERVICE_ADDRESS);
         updateData(obj, addressRequest);
         addressRepository.save(obj);
-        LOGGER.info(Log4JConstantService.LOG4J_FINISH_UPDATE_ENTITY + "Address");
+        LOGGER.info(Log4JConstantService.LOG4J_FINISH_UPDATE_ENTITY + Log4JConstantService.LOG4J_SERVICE_ADDRESS);
         return addressMapper.entityToAddressResponse(obj);
     }
 
     @Override
     public AddressResponse delete(Long id) {
-        LOGGER.info(Log4JConstantService.LOG4J_START_DELETE_ENTITY+ "address - ID: {} ", id);
+        LOGGER.info(Log4JConstantService.LOG4J_START_DELETE_ENTITY+ Log4JConstantService.LOG4J_SERVICE_ADDRESS_SEARCH_ID, id);
         Address obj = verifyIfExist(id);
-        LOGGER.info(Log4JConstantService.LOG4J_END_SEARCH+ "address");
+        LOGGER.info(Log4JConstantService.LOG4J_END_SEARCH+ Log4JConstantService.LOG4J_SERVICE_ADDRESS);
         AddressResponse addressResponse = addressMapper.entityToAddressResponse(obj);
         addressRepository.delete(obj);
-        LOGGER.info(Log4JConstantService.LOG4J_FINISH_DELETE_ENTITY+ "Address");
+        LOGGER.info(Log4JConstantService.LOG4J_FINISH_DELETE_ENTITY+ Log4JConstantService.LOG4J_SERVICE_ADDRESS);
         return addressResponse;
     }
 
     @Override
     public AddressResponse findAddressById(Long id) {
         Address obj  = verifyIfExist(id);
-        LOGGER.info(Log4JConstantService.LOG4J_END_SEARCH+ "address");
+        LOGGER.info(Log4JConstantService.LOG4J_END_SEARCH+ Log4JConstantService.LOG4J_SERVICE_ADDRESS);
         return addressMapper.entityToAddressResponse(obj);
 
     }
 
 
     protected Address verifyIfExist(Long id){
-        LOGGER.info(Log4JConstantService.LOG4J_START_OF_SEARCH + "address - ID: {} ", id);
+        LOGGER.info(Log4JConstantService.LOG4J_START_OF_SEARCH + Log4JConstantService.LOG4J_SERVICE_ADDRESS_SEARCH_ID, id);
         return addressRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("address not registered"));
     }

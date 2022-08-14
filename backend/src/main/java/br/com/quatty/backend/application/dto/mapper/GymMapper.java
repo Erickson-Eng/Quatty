@@ -12,6 +12,7 @@ public interface GymMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "school.id", source = "schoolId")
+    @Mapping(target = "practicableSports", ignore = true)
     Gym gymRequestToEntity(GymRequest gymRequest);
 
     @Mapping(target = "schoolResponse", source = "school")
