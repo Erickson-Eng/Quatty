@@ -35,13 +35,13 @@ public class AthleteServicePostgresql implements AthleteService {
     @Transactional
     @Override
     public AthleteResponse save(AthleteRequest athleteRequest) {
-        LOGGER.info(Log4JConstantService.LOG4J_START_SAVE_ENTITY + "athlete");
+        LOGGER.info(Log4JConstantService.LOG4J_START_SAVE_ENTITY + Log4JConstantService.LOG4J_SERVICE_ATHLETE);
         Athlete athlete = athleteMapper.athleteRequestToEntity(athleteRequest);
         try {
             athleteRepository.save(athlete);
-            LOGGER.info(Log4JConstantService.LOG4J_FINISH_SAVE_ENTITY + "athlete");
+            LOGGER.info(Log4JConstantService.LOG4J_FINISH_SAVE_ENTITY + Log4JConstantService.LOG4J_SERVICE_ATHLETE);
         }catch (RuntimeException e){
-            LOGGER.info(Log4JConstantService.LOG4J_ERROR_SAVE_ENTITY + "athlete");
+            LOGGER.info(Log4JConstantService.LOG4J_ERROR_SAVE_ENTITY + Log4JConstantService.LOG4J_SERVICE_ATHLETE);
             throw new DataIntegrityViolationException(e.getMessage());
         }
         return athleteMapper.entityToAthleteResponse(athlete);
@@ -51,7 +51,7 @@ public class AthleteServicePostgresql implements AthleteService {
     @Override
     public AthleteResponse update(Long id, AthleteRequest athleteRequest) {
         Athlete athlete = verifyIfExist(id);
-        LOGGER.info(Log4JConstantService.LOG4J_END_SEARCH+ "athlete - ID: {}", id);
+        LOGGER.info(Log4JConstantService.LOG4J_END_SEARCH+ Log4JConstantService.LOG4J_SERVICE_ATHLETE_SEARCH_ID, id);
         updateDate(athlete, athleteRequest);
         athleteRepository.save(athlete);
         return athleteMapper.entityToAthleteResponse(athlete);
@@ -60,19 +60,19 @@ public class AthleteServicePostgresql implements AthleteService {
     @Override
     public AthleteTableResponse listAthleteForName(String name) {
         List<Athlete> athletes = findAthleteByName(name);
-        LOGGER.info(Log4JConstantService.LOG4J_END_SEARCH+ "athlete NAME: {}", name);
+        LOGGER.info(Log4JConstantService.LOG4J_END_SEARCH+ Log4JConstantService.LOG4J_SERVICE_ATHLETE_SEARCH_NAME, name);
         return new AthleteTableResponse(entityListToResponseList(athletes));
     }
 
     private List<Athlete> findAthleteByName(String name){
-        LOGGER.info(Log4JConstantService.LOG4J_START_OF_SEARCH + "athlete - ATHLETE NAME: {} ", name);
+        LOGGER.info(Log4JConstantService.LOG4J_START_OF_SEARCH + Log4JConstantService.LOG4J_SERVICE_ATHLETE_SEARCH_NAME, name);
         return athleteRepository.findAthleteByFirstNameContainingIgnoreCase(name)
                 .orElseThrow(() -> new EntityNotFoundException(MessageFormat.format(
                         "There are no athlete registered for the given name. Name: {}", name)));
     }
 
     private Athlete verifyIfExist(Long id){
-        LOGGER.info(Log4JConstantService.LOG4J_START_OF_SEARCH + "athlete - ATHLETE ID: {} ", id);
+        LOGGER.info(Log4JConstantService.LOG4J_START_OF_SEARCH + Log4JConstantService.LOG4J_SERVICE_ATHLETE_SEARCH_ID, id);
         return athleteRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("athlete not registered"));
     }

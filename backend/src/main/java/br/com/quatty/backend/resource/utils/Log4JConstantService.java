@@ -14,6 +14,10 @@ public class Log4JConstantService {
 
     public static final String LOG4J_SERVICE_ADDRESS = "ADDRESS SERVICE.";
     public static final String LOG4J_SERVICE_ADDRESS_SEARCH_ID = "address - ID: {} ";
+
+    public static final String LOG4J_SERVICE_ATHLETE = "ATHLETE SERVICE.";
+    public static final String LOG4J_SERVICE_ATHLETE_SEARCH_ID = "athlete - ATHLETE ID: {}.";
+    public static final String LOG4J_SERVICE_ATHLETE_SEARCH_NAME = "athlete - ATHLETE NAME: {}.";
     private Log4JConstantService(){
 
     }
