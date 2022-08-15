@@ -1,5 +1,6 @@
 package br.com.quatty.backend.business.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.Hibernate;
 import org.springframework.data.annotation.CreatedDate;
@@ -32,6 +33,7 @@ public class User implements UserDetails, Serializable {
     private Long id;
     @Column(nullable = false, unique = true)
     private String username;
+    @JsonIgnore
     @Column(nullable = false)
     private String password;
     @Column(nullable = false, unique = true)
@@ -42,7 +44,7 @@ public class User implements UserDetails, Serializable {
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
     )
-    private List<Role> roles = new java.util.ArrayList<>();
+    private List<Role> roles;
 
 
     @Column(name = "created_date", updatable = false)
