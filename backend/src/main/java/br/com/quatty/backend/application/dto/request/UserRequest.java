@@ -18,6 +18,6 @@ public class UserRequest {
     private String username;
     @NotBlank(message = "It is necessary to enter a password to create a user")
     private String password;
-    @Email(message = "It is necessary to enter a email to create a user")
+    @Email(message = "You must enter a valid email to create a new account.")
     private String email;
 }

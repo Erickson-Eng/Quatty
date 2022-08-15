@@ -4,6 +4,7 @@ import br.com.quatty.backend.application.dto.mapper.UserMapper;
 import br.com.quatty.backend.application.dto.request.UserRequest;
 import br.com.quatty.backend.business.entity.Role;
 import br.com.quatty.backend.business.entity.User;
+import br.com.quatty.backend.business.entity.enums.RoleName;
 import br.com.quatty.backend.business.service.UserService;
 import br.com.quatty.backend.resource.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -46,7 +47,7 @@ public class UserServicePostgresql implements UserService {
                 .email(userRequest.getEmail())
                 .password(new BCryptPasswordEncoder().encode(userRequest.getPassword()))
                 .username(userRequest.getUsername())
-                .roles(Collections.singletonList(new Role(2L, null)))
+                .roles(Collections.singletonList(new Role(2L, RoleName.ROLE_ADMIN)))
                 .build();
     }
     protected boolean verifyIfExist(String usernameOrEmail){
