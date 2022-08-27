@@ -9,6 +9,7 @@ import io.swagger.annotations.ApiResponses;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -38,6 +39,7 @@ public class AddressController {
                                          @RequestBody @Valid AddressRequest addressRequest){
         return addressService.update(id, addressRequest);
     }
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @ApiOperation(value = "Delete a address in the database")
     @ApiResponses({
             @ApiResponse(code = 200, message = "ok", response = AddressResponse.class)

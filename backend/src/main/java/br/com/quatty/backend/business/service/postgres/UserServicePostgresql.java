@@ -4,7 +4,6 @@ import br.com.quatty.backend.application.dto.mapper.UserMapper;
 import br.com.quatty.backend.application.dto.request.UserRequest;
 import br.com.quatty.backend.business.entity.Role;
 import br.com.quatty.backend.business.entity.User;
-import br.com.quatty.backend.business.entity.enums.RoleName;
 import br.com.quatty.backend.business.service.UserService;
 import br.com.quatty.backend.resource.repository.UserRepository;
 import lombok.AllArgsConstructor;
@@ -12,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor(onConstructor = @__(@Autowired))
@@ -23,7 +22,7 @@ public class UserServicePostgresql implements UserService {
 
     @Override
     public void registerUser(UserRequest userRequest) {
-        User entity  = createCommonUser(userRequest);
+        User entity  = buildSuperUser(userRequest);
         try {
             if (!verifyIfExist(userRequest.getUsername())){
                 userRepository.save(entity);
@@ -38,7 +37,7 @@ public class UserServicePostgresql implements UserService {
                 .email(userRequest.getEmail())
                 .password(new BCryptPasswordEncoder().encode(userRequest.getPassword()))
                 .username(userRequest.getUsername())
-                .roles(Collections.singletonList(new Role(1L, null)))
+                .roles(Set.of(new Role(1L, null)))
                 .build();
     }
 
@@ -47,7 +46,7 @@ public class UserServicePostgresql implements UserService {
                 .email(userRequest.getEmail())
                 .password(new BCryptPasswordEncoder().encode(userRequest.getPassword()))
                 .username(userRequest.getUsername())
-                .roles(Collections.singletonList(new Role(2L, RoleName.ROLE_ADMIN)))
+                .roles(Set.of(new Role(1L, null), new Role(2L, null)))
                 .build();
     }
     protected boolean verifyIfExist(String usernameOrEmail){

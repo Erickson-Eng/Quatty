@@ -1,36 +1,40 @@
 package br.com.quatty.backend.application.config.security;
 
 import br.com.quatty.backend.business.entity.User;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.io.Decoders;
-import io.jsonwebtoken.security.Keys;
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
-import java.security.Key;
+import java.util.ArrayList;
 import java.util.Date;
 
 @Service
 public class TokenService {
 
-    @Value("${quatty.jwt.expiration}")
-    private String expiration;
+    public static final int TOKEN_EXP = 6000_000;
 
     @Value("${quatty.jwt.secret}")
     private String secret;
 
     public String generateToken(Authentication authentication){
         User user = (User) authentication.getPrincipal();
-        Date startDate =  new Date();
-        Date expirationDate = new Date(startDate.getTime() + Long.parseLong(expiration));
-        Key secretKey = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret));
-        return Jwts.builder()
-                .setIssuer("QUATTY'S API")
-                .setSubject(user.getId().toString())
-                .setIssuedAt(startDate)
-                .setExpiration(expirationDate)
-                .signWith(secretKey)
-                .compact();
+        return JWT.create()
+                .withSubject(user.getUsername())
+                .withExpiresAt(new Date(System.currentTimeMillis() + TOKEN_EXP))
+                .sign(Algorithm.HMAC512(secret));
+    }
+
+    // verificar problema nas credenciais
+    public UsernamePasswordAuthenticationToken getAuthenticationToken(String token){
+        String user = JWT.require(Algorithm.HMAC512(secret))
+                .build().verify(token).getSubject();
+
+        if (user.isEmpty()){
+            return null;
+        }
+        return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
     }
 }
