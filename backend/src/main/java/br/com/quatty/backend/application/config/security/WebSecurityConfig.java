@@ -54,7 +54,7 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests()
                 .antMatchers(PUBLIC_MATCHERS).permitAll()
                 .anyRequest().authenticated()
-                .and()
+                .and().cors().and()
                 .csrf().disable()
                 .addFilter(new JWTValidateFilter(authenticationManager(new AuthenticationConfiguration()), tokenService))
                 .addFilter(new JWTAuthenticationFilter(authenticationManager(new AuthenticationConfiguration()), tokenService))
@@ -79,6 +79,8 @@ public class WebSecurityConfig {
         final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 
         CorsConfiguration corsConfiguration = new CorsConfiguration().applyPermitDefaultValues();
+        corsConfiguration.addAllowedMethod("POST");
+        corsConfiguration.addAllowedOrigin("http://localhost:3000");
         source.registerCorsConfiguration("/**", corsConfiguration);
         return source;
     }

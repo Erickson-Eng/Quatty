@@ -16,7 +16,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @MappedSuperclass
-public class Profile implements Serializable {
+public abstract class Profile implements Serializable {
     private static final long serialVersionUID = 6418037816190438631L;
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "profile_seq")
